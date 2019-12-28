@@ -1,10 +1,10 @@
 "use strict";
 
 var NodeHelper = require("node_helper");
-var TransportApiClient = require("./core/transport-api-client/transport-api-client");
+const { TransportApiClient } = require("./core/transport-api-client");
 module.exports = NodeHelper.create({
   start: function () {
-    this.departuresFetcher = [];
+    this.departuresFetchers = [];
   },
 
   socketNotificationReceived: function (notification, payload) {
@@ -21,8 +21,8 @@ module.exports = NodeHelper.create({
   createFetcher: function (config) {
     let fetcher;
 
-    if (typeof this.departuresFetcher[config.identifier] === "undefined") {
-      fetcher = new TransportApiClient();
+    if (typeof this.departuresFetchers[config.identifier] === "undefined") {
+      fetcher = new TransportApiClient(config);
       this.departuresFetchers[config.identifier] = fetcher;
       console.log(
         "Transportation fetcher for station with id '" +
@@ -50,6 +50,7 @@ module.exports = NodeHelper.create({
   },
 
   fetchDepartures(identifier) {
+    debugger;
     let fetcher = this.departuresFetchers[identifier];
 
     fetcher
