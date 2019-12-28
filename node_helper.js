@@ -49,19 +49,37 @@ module.exports = NodeHelper.create({
     });
   },
 
-  fetchDepartures(identifier) {
-    debugger;
+  fetchDeparturesFromFirstStation: function (identifier, station) {
     let fetcher = this.departuresFetchers[identifier];
-
+    console.log('fetchDeparturesFromFirstStation for id: ' + station.id);
     fetcher
-      .requestLocationsByName("Hölderlinstrasse")
-      .then(fetchedDepartures => {
+      .requestStationboardById(station.id)
+      .limitResponse(10)
+      .send()
+      .then(stationboardResponse => {
+        console.log('got stationboard count: ' + stationboardResponse.length);
         let payload = {
           identifier: fetcher.getIdentifier(),
-          departures: fetchedDepartures
+          departures: stationboardResponse
         };
-
         this.sendSocketNotification("DEPARTURES_FETCHED", payload);
+      })
+      .catch(err => {
+        console.log(err)
+      });
+  },
+
+  fetchDepartures(identifier) {
+    let fetcher = this.departuresFetchers[identifier];
+    console.log('starting to fetchDepartures')
+    fetcher
+      .requestLocationsByName("Hölderlinstrasse")
+      .send()
+      .then(fetchedDepartures => {
+        console.log('got station count: ' + fetchedDepartures.length);
+        if (fetchedDepartures && fetchedDepartures.length > 0) {
+          this.fetchDeparturesFromFirstStation(identifier, fetchedDepartures[0])
+        }
       })
       .catch(error => {
         let payload = {

@@ -1,6 +1,6 @@
 {
   "name": "mmm-publictransport-ch",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Public transport module for MagicMirror2 using transport.opendata.ch and the client robingoeppert/transport-api-client",
   "repository": {
     "type": "git",

@@ -36,7 +36,7 @@ Module.register("MMM-PublicTransportCH", {
     showOnlyLineNumbers: false // Display only the line number instead of the complete name, i. e. "11" instead of "STR 11"
   },
 
-  start: function() {
+  start: function () {
     Log.info(
       "Starting module: " + this.name + " with identifier: " + this.identifier
     );
@@ -67,7 +67,30 @@ Module.register("MMM-PublicTransportCH", {
 
     this.sendSocketNotification("CREATE_TRANSPORT_CLIENT", fetcherOptions);
   },
-  getStyles: function() {
+
+  getDom: function () {
+    let domBuilder = new PTCHDomBuilder(this.config);
+
+    if (this.hasErrors()) {
+      return domBuilder.getSimpleDom(this.error.message);
+    }
+
+    if (!this.initialized) {
+      return domBuilder.getSimpleDom(this.translate('LOADING'));
+    }
+
+    let headings = {
+      time: this.translate("PTCH_DEPARTURE_TIME"),
+      line: this.translate("PTCH_LINE"),
+      direction: this.translate("PTCH_TO")
+    };
+
+    let noDeparturesMessage = this.translate("PTCH_NO_DEPARTURES");
+
+    return domBuilder.getDom(this.departures, headings, noDeparturesMessage);
+  },
+
+  getStyles: function () {
     let styles = [this.file("css/styles.css"), "font-awesome.css"];
 
     if (this.config.customLineStyles !== "") {
@@ -78,7 +101,7 @@ Module.register("MMM-PublicTransportCH", {
     return styles;
   },
 
-  getScripts: function() {
+  getScripts: function () {
     return [
       "moment.js",
       this.file("core/PTCHDomBuilder.js"),
@@ -86,18 +109,19 @@ Module.register("MMM-PublicTransportCH", {
     ];
   },
 
-  getTranslations: function() {
+  getTranslations: function () {
     return {
       en: "translations/en.json",
       de: "translations/de.json"
     };
   },
 
-  socketNotificationReceived: function(notification, payload) {
+  socketNotificationReceived: function (notification, payload) {
+    console.log('socketNotificationReceived: ' + notification)
     if (!this.isForThisStation(payload)) {
+      console.log('not for identifier!')
       return;
     }
-
     switch (notification) {
       case "TRANSPORT_CLIENT_INITIALIZED":
         this.initialized = true;
@@ -122,11 +146,11 @@ Module.register("MMM-PublicTransportCH", {
     }
   },
 
-  isForThisStation: function(payload) {
+  isForThisStation: function (payload) {
     return payload.identifier === this.identifier;
   },
 
-  sanitzeConfig: function() {
+  sanitzeConfig: function () {
     if (this.config.updatesEvery < 30) {
       this.config.updatesEvery = 30;
     }
@@ -148,7 +172,7 @@ Module.register("MMM-PublicTransportCH", {
     }
   },
 
-  startFetchingLoop: function(interval) {
+  startFetchingLoop: function (interval) {
     // start immediately ...
     this.sendSocketNotification("FETCH_DEPARTURES", this.identifier);
 
@@ -158,7 +182,7 @@ Module.register("MMM-PublicTransportCH", {
     }, interval * 1000);
   },
 
-  hasErrors: function() {
+  hasErrors: function () {
     return Object.keys(this.error).length > 0;
   }
 });

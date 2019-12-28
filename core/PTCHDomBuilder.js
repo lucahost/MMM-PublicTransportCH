@@ -71,6 +71,7 @@ class PTCHDomBuilder {
   }
 
   getDeparturesTable(departures, headings, noDepartureMessage) {
+    console.log('getDeparturesTable')
     let table = document.createElement("table");
     table.className = "ptchTable small";
 

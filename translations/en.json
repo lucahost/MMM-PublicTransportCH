@@ -1,1 +1,7 @@
-{}
+{
+    "NO_STATION_ID_SET": "You have not provided a stationID!<br>Please set stationID in config.js!",
+    "PTCH_NO_DEPARTURES": "No reachable departures.",
+    "PTCH_DEPARTURE_TIME": "Time",
+    "PTCH_LINE": "Line",
+    "PTCH_TO": "To"
+}

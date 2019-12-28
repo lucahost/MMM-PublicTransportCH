@@ -15,7 +15,6 @@ class PTCHTableBodyBuilder {
 
       return tBody;
     }
-
     let reachableCount = departures.length;
     let unreachableCount = departures.filter(
       departure => !departure.isReachable
@@ -31,12 +30,12 @@ class PTCHTableBodyBuilder {
       tBody.appendChild(row);
 
       let nextDeparture = departures[index + 1];
-      this.insertRulerIfNecessary(
-        tBody,
-        departure,
-        nextDeparture,
-        noDepartureMessage
-      );
+      // this.insertRulerIfNecessary(
+      //   tBody,
+      //   departure,
+      //   nextDeparture,
+      //   noDepartureMessage
+      // );
     });
 
     return tBody;
@@ -110,18 +109,18 @@ class PTCHTableBodyBuilder {
 
     switch (key) {
       case "time":
-        let time = departure.when;
-        let delay = departure.delay;
+        let time = departure.stop.departure;
+        let delay = departure.stop.delay;
         cell = this.getTimeCell(time, delay);
         break;
 
       case "line":
-        let line = departure.line.name;
+        let line = departure.name;
         cell = this.getLineCell(line);
         break;
 
       case "direction":
-        let direction = departure.direction;
+        let direction = departure.to;
         cell = this.getDirectionCell(direction);
         break;
     }
