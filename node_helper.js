@@ -1,7 +1,7 @@
 "use strict";
 
 var NodeHelper = require("node_helper");
-var TransportApiClient = require("./core/TransportApiClient");
+var TransportApiClient = require("transport-api-client");
 module.exports = NodeHelper.create({
   start: function() {
     this.departuresFetcher = [];
