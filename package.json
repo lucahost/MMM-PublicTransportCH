@@ -22,5 +22,10 @@
   "homepage": "https://github.com/lucahost/MMM-PublicTransportCH",
   "engines": {
     "node": ">=7"
+  },
+  "dependencies": {
+    "@types/node": "^9.4.0",
+    "moment": "^2.20.1",
+    "web-request": "^1.0.7"
   }
 }

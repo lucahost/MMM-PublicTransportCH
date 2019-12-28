@@ -23,8 +23,8 @@ var __extends =
     };
   })();
 Object.defineProperty(exports, "__esModule", { value: true });
-import { TransportApiRequest } from "./transport-api-request";
-import { json } from "web-request";
+var transport_api_request_1 = require("./transport-api-request");
+var WebRequest = require("web-request");
 var ConnectionRequest = /** @class */ (function(_super) {
   __extends(ConnectionRequest, _super);
   function ConnectionRequest() {
@@ -166,11 +166,10 @@ var ConnectionRequest = /** @class */ (function(_super) {
     return this.addParam("accessibility", accessibility);
   };
   ConnectionRequest.prototype.send = function() {
-    return json(this.url).then(function(value) {
+    return WebRequest.json(this.url).then(function(value) {
       return value.connections;
     });
   };
   return ConnectionRequest;
-})(TransportApiRequest);
-const _ConnectionRequest = ConnectionRequest;
-export { _ConnectionRequest as ConnectionRequest };
+})(transport_api_request_1.TransportApiRequest);
+exports.ConnectionRequest = ConnectionRequest;

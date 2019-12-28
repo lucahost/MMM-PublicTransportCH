@@ -23,8 +23,8 @@ var __extends =
     };
   })();
 Object.defineProperty(exports, "__esModule", { value: true });
-import { TransportApiRequest } from "./transport-api-request";
-import { json } from "web-request";
+var transport_api_request_1 = require("./transport-api-request");
+var WebRequest = require("web-request");
 var LocationRequest = /** @class */ (function(_super) {
   __extends(LocationRequest, _super);
   function LocationRequest() {
@@ -78,11 +78,10 @@ var LocationRequest = /** @class */ (function(_super) {
     return this;
   };
   LocationRequest.prototype.send = function() {
-    return json(this.url).then(function(value) {
+    return WebRequest.json(this.url).then(function(value) {
       return value.stations;
     });
   };
   return LocationRequest;
-})(TransportApiRequest);
-const _LocationRequest = LocationRequest;
-export { _LocationRequest as LocationRequest };
+})(transport_api_request_1.TransportApiRequest);
+exports.LocationRequest = LocationRequest;
