@@ -1,6 +1,6 @@
 "use strict";
 
-class PTHAFASTableBodyBuilder {
+class PTCHTableBodyBuilder {
   constructor(config) {
     this.config = config;
   }
@@ -133,7 +133,7 @@ class PTHAFASTableBodyBuilder {
     let time = this.getDisplayDepartureTime(departure, delay);
 
     let cell = document.createElement("td");
-    cell.className = "pthTimeCell";
+    cell.className = "ptchTimeCell";
     cell.appendChild(document.createTextNode(time));
 
     if (this.config.showAbsoluteTime) {
@@ -150,10 +150,10 @@ class PTHAFASTableBodyBuilder {
     let cssClass = "dimmed";
 
     if (this.config.useColorForRealtimeInfo) {
-      cssClass = delay > 0 ? "pthHasDelay" : "pthIsTooEarly";
+      cssClass = delay > 0 ? "ptchHasDelay" : "ptchIsTooEarly";
     }
 
-    delaySpan.className = "pthDelay " + cssClass;
+    delaySpan.className = "ptchDelay " + cssClass;
 
     return delaySpan;
   }
@@ -185,7 +185,7 @@ class PTHAFASTableBodyBuilder {
 
     let lineDiv = document.createElement("div");
     lineDiv.innerHTML = line;
-    lineDiv.className = this.getLineCssClass(lineName) + " pthTextCenter";
+    lineDiv.className = this.getLineCssClass(lineName) + " ptchTextCenter";
 
     return this.getTableCell(lineDiv);
   }
@@ -194,17 +194,17 @@ class PTHAFASTableBodyBuilder {
     if (this.config.showColoredLineSymbols) {
       return this.getColoredCssClass(lineName);
     } else {
-      return "pthSign pthBWLineSign";
+      return "ptchSign ptchBWLineSign";
     }
   }
 
   getColoredCssClass(lineName) {
-    let className = "pthSign ";
+    let className = "ptchSign ";
     let prefix = lineName.split(" ")[0];
     let dbProducts = ["RE", "RB", "IC", "ICE"];
 
     if (dbProducts.includes(prefix)) {
-      className += prefix.toLowerCase() + " pthDbStandard";
+      className += prefix.toLowerCase() + " ptchDbStandard";
 
       if (this.config.showOnlyLineNumbers) {
         className += " " + prefix.toLowerCase() + "WithProductName";
@@ -219,7 +219,7 @@ class PTHAFASTableBodyBuilder {
   getDirectionCell(direction) {
     let truncatePosition = 26;
     let content = this.getProcessedDirection(direction);
-    let className = "pthDirectionCell";
+    let className = "ptchDirectionCell";
 
     if (
       this.config.marqueeLongDirections &&
@@ -227,11 +227,11 @@ class PTHAFASTableBodyBuilder {
     ) {
       content = document.createElement("span");
       content.innerHTML = this.getProcessedDirection(direction);
-      className += " pthMarquee";
+      className += " ptchMarquee";
     }
 
     if (!this.config.showAbsoluteTime) {
-      className += " pthTextLeft";
+      className += " ptchTextLeft";
     }
 
     return this.getTableCell(content, className);
@@ -291,7 +291,7 @@ class PTHAFASTableBodyBuilder {
     let cell = document.createElement("td");
 
     cell.colSpan = 3;
-    cell.className = "pthRulerCell";
+    cell.className = "ptchRulerCell";
     row.appendChild(cell);
 
     return row;

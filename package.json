@@ -1,0 +1,26 @@
+{
+  "name": "mmm-publictransport-ch",
+  "version": "0.0.1",
+  "description": "Public transport module for MagicMirror2 using transport.opendata.ch and the client robingoeppert/transport-api-client",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lucahost/MMM-PublicTransportCH.git"
+  },
+  "keywords": [
+    "sbb",
+    "transport",
+    "opendata",
+    "magicmirror",
+    "module",
+    "publictransport"
+  ],
+  "author": "Luca Hostettler",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lucahost/MMM-PublicTransportCH/issues"
+  },
+  "homepage": "https://github.com/lucahost/MMM-PublicTransportCH",
+  "engines": {
+    "node": ">=7"
+  }
+}

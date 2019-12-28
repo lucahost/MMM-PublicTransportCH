@@ -1,6 +1,6 @@
 "use strict";
 
-class PTHAFASDomBuilder {
+class PTCHDomBuilder {
   constructor(config) {
     this.config = config;
 
@@ -32,7 +32,7 @@ class PTHAFASDomBuilder {
 
   getWrapper() {
     let wrapper = document.createElement("div");
-    wrapper.className = "pthWrapper";
+    wrapper.className = "ptchWrapper";
     wrapper.appendChild(
       this.createHeadingElement(
         this.config.headerPrefix,
@@ -72,14 +72,14 @@ class PTHAFASDomBuilder {
 
   getDeparturesTable(departures, headings, noDepartureMessage) {
     let table = document.createElement("table");
-    table.className = "pthTable small";
+    table.className = "ptchTable small";
 
     if (this.config.showTableHeaders) {
       let tableHeader = this.getDeparturesTableHeader(headings);
       table.appendChild(tableHeader);
     }
 
-    let tableBodyBuilder = new PTHAFASTableBodyBuilder(this.config);
+    let tableBodyBuilder = new PTCHTableBodyBuilder(this.config);
     let tableBody = tableBodyBuilder.getDeparturesTableBody(
       departures,
       noDepartureMessage
@@ -112,7 +112,7 @@ class PTHAFASDomBuilder {
     };
 
     if (key === "line" || key === "direction") {
-      result.cssClass = "pthTextCenter";
+      result.cssClass = "ptchTextCenter";
     }
 
     return result;

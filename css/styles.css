@@ -1,0 +1,150 @@
+/*
+All classes used by this module use the prefix "ptCH" (PublicTranpsportCH) to separate
+them from the rest of the interface.
+ */
+
+.ptchWrapper {
+  position: relative;
+}
+
+.ptchTable {
+  border-collapse: collapse;
+  border-spacing: 1px;
+  display: table;
+}
+
+.ptchTable > thead {
+  text-align: left;
+}
+
+.ptchTable td {
+  vertical-align: middle;
+}
+
+.ptchTimeCell {
+  text-align: left;
+}
+
+.ptchDirectionCell {
+  max-width: 24ch;
+  min-width: 16ch;
+  overflow: hidden;
+  padding-left: 1ch;
+  padding-right: 1ch;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ptchRulerCell {
+  border-bottom: 1px dotted #666;
+  border-spacing: 10px;
+  line-height: 0;
+}
+
+.ptchTextLeft {
+  text-align: left;
+}
+
+.ptchTextRight {
+  text-align: right;
+}
+
+.ptchTextCenter {
+  text-align: center;
+}
+
+.ptchDelay {
+  font-size: 0.8em;
+  font-weight: bolder;
+}
+
+.ptchHasDelay {
+  color: red;
+}
+
+.ptchIsTooEarly {
+  color: green;
+}
+
+.ptchMarquee {
+  box-sizing: border-box;
+  margin: 0 auto;
+  overflow: hidden;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.ptchMarquee span {
+  animation: ptchMarquee 3s linear infinite alternate;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+@keyframes ptchMarquee {
+  /* Two keyframe positions each to generate a little delay between animations. */
+  0%,
+  30% {
+    transform: translate(0%, 0);
+  }
+  95%,
+  100% {
+    transform: translate(-35%, 0);
+  }
+}
+
+/* Styles for line symbols. */
+.ptchSign {
+  background-color: #333333;
+  color: #666666;
+
+  font-size: 0.9em;
+  font-weight: bold;
+  margin: 0.1rem auto;
+  padding-left: 5px;
+  padding-right: 5px;
+  position: relative;
+  text-align: center;
+}
+
+.ptchBWLineSign {
+  background-color: #333333;
+  color: #666666;
+  margin-right: 0.3em;
+}
+
+/* Standards for Deutsche Bahn products. */
+.ptchDbStandard {
+  border-radius: 5px;
+  font-size: 0.8em;
+  line-height: 1.4em;
+}
+
+.ice,
+.ic {
+  background-color: white;
+  border-bottom: 4px #f01414 solid;
+  color: #f01414;
+}
+
+.rb,
+.re {
+  background-color: #f01414;
+  border: 0.5px white solid;
+  color: white;
+}
+
+.iceWithProductName:before {
+  content: "ICE ";
+}
+
+.icWithProductName:before {
+  content: "IC ";
+}
+
+.reWithProductName:before {
+  content: "RE ";
+}
+
+.rbWithProductName:before {
+  content: "RB ";
+}
