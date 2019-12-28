@@ -1,13 +1,13 @@
 "use strict";
 
 var NodeHelper = require("node_helper");
-var TransportApiClient = require("transport-api-client");
+var TransportApiClient = require("./core/transport-api-client/transport-api-client");
 module.exports = NodeHelper.create({
-  start: function() {
+  start: function () {
     this.departuresFetcher = [];
   },
 
-  socketNotificationReceived: function(notification, payload) {
+  socketNotificationReceived: function (notification, payload) {
     switch (notification) {
       case "CREATE_TRANSPORT_CLIENT":
         this.createFetcher(payload);
@@ -18,7 +18,7 @@ module.exports = NodeHelper.create({
     }
   },
 
-  createFetcher: function(config) {
+  createFetcher: function (config) {
     let fetcher;
 
     if (typeof this.departuresFetcher[config.identifier] === "undefined") {
@@ -26,8 +26,8 @@ module.exports = NodeHelper.create({
       this.departuresFetchers[config.identifier] = fetcher;
       console.log(
         "Transportation fetcher for station with id '" +
-          fetcher.getStationID() +
-          "' created."
+        fetcher.getStationID() +
+        "' created."
       );
 
       this.sendFetcherLoaded(fetcher);
@@ -35,15 +35,15 @@ module.exports = NodeHelper.create({
       fetcher = this.departuresFetchers[config.identifier];
       console.log(
         "Using existing transportation fetcher for station id '" +
-          fetcher.getStationID() +
-          "'."
+        fetcher.getStationID() +
+        "'."
       );
 
       this.sendFetcherLoaded(fetcher);
     }
   },
 
-  sendFetcherLoaded: function(fetcher) {
+  sendFetcherLoaded: function (fetcher) {
     this.sendSocketNotification("TRANSPORT_CLIENT_INITIALIZED", {
       identifier: fetcher.getIdentifier()
     });
