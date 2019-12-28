@@ -41,6 +41,24 @@ Module.register("MMM-PublicTransportCH", {
       "Starting module: " + this.name + " with identifier: " + this.identifier
     );
 
+    if (navigator) {
+      if (navigator.geolocation) {
+        var options = {
+          enableHighAccuracy: true,
+          timeout: 5000,
+          maximumAge: 0
+        };
+        navigator.geolocation.getCurrentPosition((position => {
+          console.log("lat: " + position.coords.latitude);
+          console.log("lon: " + position.coords.longitude);
+        }), (errorCallback => {
+          console.log(errorCallback);
+        }), options);
+      }
+    } else {
+      Log.info("navigator not found");
+    }
+
     this.departures = [];
     this.initialized = false;
     this.error = {};
