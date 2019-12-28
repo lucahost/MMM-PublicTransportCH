@@ -2,7 +2,7 @@
   This stylesheet contains the css classes needed to colorize the line
   labels in the display.
   To customize this use as class name the name of the line without any
-  blanks and all lower case. For instance "Tram N9" becomes ".busn9"
+  blanks and all lower case. For instance "Tram N9" becomes ".t9"
  */
 
 /*
@@ -29,47 +29,64 @@
     text color. The width of the line symbol is equal to the font size. This
     will result in a square symbol.
    */
-.str1,
-.str3,
-.str3e {
-  background-color: #5eb246;
+.t2,
+.t15 {
+  background-color: #D8232A;
   color: white;
   width: 1em;
 }
-
-.str2,
-.str8,
-.str9 {
-  background-color: #f8c623;
-  color: black;
-  width: 1em;
-}
-
-.str14 {
-  background-color: #00a8db;
-  color: black;
-  width: 1em;
-}
-
-.str4,
-.str7,
-.str12,
-.str15 {
-  background-color: #174489;
+.t3,
+.t11 {
+  background-color: #009F4A;
   color: white;
   width: 1em;
 }
-
-.str10,
-.str11,
-.str16,
-.str51,
-.str56 {
-  background-color: #d8232a;
+.t4,
+.t9 {
+  background-color: #3E4085;
   color: white;
   width: 1em;
 }
-
+.t5 {
+  background-color: #855B37;
+  color: white;
+  width: 1em;
+}
+.t6 {
+  background-color: #DA9F4F;
+  color: white;
+  width: 1em;
+}
+.t7 {
+  background-color: #191919;
+  color: white;
+  width: 1em;
+}
+.t8{
+  background-color: #86CD16;
+  color: white;
+  width: 1em;
+}
+.t10 {
+  background-color: #DA3987;
+  color: white;
+  width: 1em;
+}
+.t12 {
+  background-color: #7ACAD4;
+  color: white;
+  width: 1em;
+}
+.t13 {
+  background-color: #FBD01F;
+  color: white;
+  width: 1em;
+}
+.t14 {
+  background-color: #00A4DB;
+  color: white;
+  width: 1em;
+}
 /*
     Bus symbols should be displayed as a circle. That’s why the width and the
     border-radius are both 1em.

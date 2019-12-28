@@ -115,7 +115,7 @@ class PTCHTableBodyBuilder {
         break;
 
       case "line":
-        let line = departure.name;
+        let line = departure.category + departure.number;
         cell = this.getLineCell(line);
         break;
 
@@ -183,7 +183,7 @@ class PTCHTableBodyBuilder {
     }
 
     let lineDiv = document.createElement("div");
-    lineDiv.innerHTML = line;
+    lineDiv.innerHTML = line.substring(1);
     lineDiv.className = this.getLineCssClass(lineName) + " ptchTextCenter";
 
     return this.getTableCell(lineDiv);
