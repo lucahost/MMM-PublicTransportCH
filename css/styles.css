@@ -33,6 +33,7 @@ them from the rest of the interface.
   padding-right: 1ch;
   text-overflow: ellipsis;
   white-space: nowrap;
+  text-align: left;
 }
 
 .ptchRulerCell {

@@ -55,6 +55,7 @@ Module.register("MMM-PublicTransportCH", {
     }
     let fetcherOptions = {
       identifier: this.identifier,
+      stationName: this.config.stationName,
       stationID: this.config.stationID,
       timeToStation: this.config.timeToStation,
       timeInFuture: this.config.timeInFuture,

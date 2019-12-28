@@ -71,23 +71,25 @@ module.exports = NodeHelper.create({
 
   fetchDepartures(identifier) {
     let fetcher = this.departuresFetchers[identifier];
-    console.log('starting to fetchDepartures')
-    fetcher
-      .requestLocationsByName("Hölderlinstrasse")
-      .send()
-      .then(fetchedDepartures => {
-        console.log('got station count: ' + fetchedDepartures.length);
-        if (fetchedDepartures && fetchedDepartures.length > 0) {
-          this.fetchDeparturesFromFirstStation(identifier, fetchedDepartures[0])
-        }
-      })
-      .catch(error => {
-        let payload = {
-          identifier: fetcher.getIdentifier(),
-          error: error
-        };
+    if (fetcher != null) {
+      console.log('starting to fetchDepartures for: ' + fetcher.getStationName());
+      fetcher
+        .requestLocationsByName(fetcher.getStationName())
+        .send()
+        .then(fetchedDepartures => {
+          console.log('got station count: ' + fetchedDepartures.length);
+          if (fetchedDepartures && fetchedDepartures.length > 0) {
+            this.fetchDeparturesFromFirstStation(identifier, fetchedDepartures[0])
+          }
+        })
+        .catch(error => {
+          let payload = {
+            identifier: fetcher.getIdentifier(),
+            error: error
+          };
 
-        this.sendSocketNotification("FETCH_ERROR", payload);
-      });
+          this.sendSocketNotification("FETCH_ERROR", payload);
+        });
+    }
   }
 });

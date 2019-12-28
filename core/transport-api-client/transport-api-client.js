@@ -6,6 +6,7 @@ var stationboard_request_1 = require("./requests/stationboard-request");
 var moment = require("moment");
 var TransportApiClient = /** @class */ (function () {
   function TransportApiClient(config) {
+    console.log("init TransportApiClient config: " + JSON.stringify(config));
     this.config = config;
   }
 
@@ -15,6 +16,10 @@ var TransportApiClient = /** @class */ (function () {
 
   TransportApiClient.prototype.getStationID = function () {
     return this.config.stationID;
+  }
+
+  TransportApiClient.prototype.getStationName = function () {
+    return this.config.stationName;
   }
 
   /**

@@ -1,0 +1,10 @@
+{
+    module: 'MMM-PublicTransportCH',
+    position: 'bottom_left',
+    classes: 'bright medium',
+    config: {
+        stationID: '1001',
+        stationName: 'Zürich, Bellevue',
+        marqueeLongDirections: false,
+    }
+}
