@@ -3,8 +3,9 @@
     position: 'bottom_left',
     classes: 'bright medium',
     config: {
-        stationID: '1001',
+        moduleInstanceID: '1001',
         stationName: 'Zürich, Bellevue',
         marqueeLongDirections: false,
+        useGeoLocation: true,
     }
 }

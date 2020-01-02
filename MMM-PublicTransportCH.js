@@ -36,45 +36,14 @@ Module.register("MMM-PublicTransportCH", {
     showOnlyLineNumbers: false // Display only the line number instead of the complete name, i. e. "11" instead of "STR 11"
   },
 
-  start: function () {
-    Log.info(
-      "Starting module: " + this.name + " with identifier: " + this.identifier
-    );
-
-    if (navigator) {
-      if (navigator.geolocation) {
-        var options = {
-          enableHighAccuracy: true,
-          timeout: 5000,
-          maximumAge: 0
-        };
-        navigator.geolocation.getCurrentPosition((position => {
-          console.log("lat: " + position.coords.latitude);
-          console.log("lon: " + position.coords.longitude);
-        }), (errorCallback => {
-          console.log(errorCallback);
-        }), options);
-      }
-    } else {
-      Log.info("navigator not found");
-    }
-
-    this.departures = [];
-    this.initialized = false;
-    this.error = {};
-
-    this.sanitzeConfig();
-
-    if (!this.config.stationID) {
-      Log.error("stationID not set! " + this.config.stationID);
-      this.error.message = this.translate("NO_STATION_ID_SET");
-
-      return;
-    }
+  initFetcher: function (lat, lon, useGeoLocation) {
     let fetcherOptions = {
       identifier: this.identifier,
+      lat: lat,
+      lon: lon,
+      useGeoLocation: useGeoLocation,
       stationName: this.config.stationName,
-      stationID: this.config.stationID,
+      moduleInstanceID: this.config.moduleInstanceID,
       timeToStation: this.config.timeToStation,
       timeInFuture: this.config.timeInFuture,
       direction: this.config.direction,
@@ -86,6 +55,45 @@ Module.register("MMM-PublicTransportCH", {
 
     this.sendSocketNotification("CREATE_TRANSPORT_CLIENT", fetcherOptions);
   },
+  start: function () {
+    Log.info(
+      "Starting module: " + this.name + " with identifier: " + this.identifier
+    );
+
+    this.departures = [];
+    this.initialized = false;
+    this.error = {};
+
+    this.sanitzeConfig();
+
+    if (!this.config.moduleInstanceID) {
+      Log.error("moduleInstanceID not set! " + this.config.moduleInstanceID);
+      this.error.message = this.translate("NO_STATION_ID_SET");
+
+      return;
+    }
+
+    if (this.config.useGeoLocation) {
+      if (navigator && navigator.geolocation) {
+        var options = {
+          enableHighAccuracy: true,
+          timeout: 5000,
+          maximumAge: 0
+        };
+        navigator.geolocation.getCurrentPosition((position => {
+          this.initFetcher(position.coords.latitude, position.coords.longitude, true);
+        }), (errorCallback => {
+          console.log(errorCallback);
+        }), options);
+      } else {
+        Log.info("navigator not found");
+      }
+    } else {
+      initFetcher(0, 0, false);
+    }
+
+  },
+
 
   getDom: function () {
     let domBuilder = new PTCHDomBuilder(this.config);

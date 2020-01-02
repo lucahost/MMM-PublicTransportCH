@@ -14,13 +14,26 @@ var TransportApiClient = /** @class */ (function () {
     return this.config.identifier;
   }
 
-  TransportApiClient.prototype.getStationID = function () {
-    return this.config.stationID;
+  TransportApiClient.prototype.getModuleInstanceID = function () {
+    return this.config.moduleInstanceID;
   }
 
   TransportApiClient.prototype.getStationName = function () {
     return this.config.stationName;
   }
+
+  TransportApiClient.prototype.getUseGeoLocation = function () {
+    return this.config.useGeoLocation;
+  }
+
+  TransportApiClient.prototype.getX = function () {
+    return this.config.lon;
+  }
+
+  TransportApiClient.prototype.getY = function () {
+    return this.config.lat;
+  }
+
 
   /**
    * Provides a custom location request by location name
