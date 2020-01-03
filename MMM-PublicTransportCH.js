@@ -89,7 +89,7 @@ Module.register("MMM-PublicTransportCH", {
         Log.info("navigator not found");
       }
     } else {
-      initFetcher(0, 0, false);
+      this.initFetcher(0, 0, false);
     }
 
   },
